@@ -10,7 +10,7 @@ module.exports = {
         bot: {
         },
         users: {
-            currentsessions: null
+            currentsessions: {}
         }
     }
 };

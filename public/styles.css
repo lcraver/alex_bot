@@ -7,7 +7,7 @@ body {
 .chat {
     display: block;
     max-width: 400px;
-    height: 400px;
+    height: 500px;
     margin: 64px auto 0;
     background: #333;
     border-radius: 3px;
@@ -26,10 +26,74 @@ body {
 .chat .messages {
     position: absolute;
     top: 40px;
-    bottom: 40px;
+    bottom: 56px;
     left: 8px;
     right: 8px;
     background: #EDEDED;
+    overflow-y: scroll;
+    padding: 16px;
+}
+
+.chat .messages ul {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.chat .messages ul li {
+    display: block;
+    color: white;
+    padding: 0;
+    margin: 16px 0 0 0;
+}
+
+.chat .messages ul li:first-child {
+    margin: 0;
+}
+
+.chat .messages ul li .chat-message {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.chat .messages ul li .chat-message.alex {
+    justify-content: flex-start;
+}
+
+.chat .messages ul li .chat-message .user {
+    background: #333;
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+    order: 2;
+    align-self: flex-end;
+    display: none;
+}
+
+.chat .messages ul li .chat-message.alex .user {
+    background: #9CCC65;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2px;
+}
+
+.chat .messages ul li .chat-message .message {
+    background: #333;
+    padding: 8px;
+    border-radius: 3px;
+    order: 1;
+    line-height: 18px;
+    max-width: 60%;
+    word-break: break-word;
+    font-size: 14px;
+    hyphens: auto;
+}
+
+.chat .messages ul li .chat-message.alex .message {
+    background: #9CCC65;
+    margin-left: 8px;
+    order: 2;
 }
 
 .chat .input {

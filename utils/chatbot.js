@@ -21,6 +21,11 @@ class ChatBot {
             ChatBot.HandleChat(req, res);
         });
 
+        // Sends user chat message and sends back the bot's response.
+        runtime.express.delete('/chat', function(req, res) {
+            ChatBot.DestroyChatSession(req, res);
+        });
+
         // Inits a new chat session with a user.
         runtime.express.post('/chat/new', function(req, res) {
             ChatBot.CreateChatSession(req, res);
@@ -43,8 +48,32 @@ class ChatBot {
         let greetings = runtime.settings.greetings;
 
         let token = randomStringAsBase64Url(64);
-        runtime.db.users.currentsessions.push(token);
+        ChatBot.CreateSessionInfo(token);
         dataformatter.SendResponse("Chat Session Created", {token: token, response: greetings.random()}, res);
+    }
+
+    static CreateSessionInfo(token)
+    {
+        let sessionTmp = {
+            user: "",
+            context: {
+
+            }
+        }
+
+        runtime.db.users.currentsessions[token] = sessionTmp;
+    }
+
+    static UpdateSessionInfo(token, context)
+    {
+        runtime.db.users.currentsessions[token].context.push(context);
+    }
+
+    static DestroyChatSession(req, res) {
+        if(req.body.token != null && req.body.token != "") {
+            console.log("/chat - Destroy Chat Session: " + req.body.token);
+            delete runtime.db.users.currentsessions[req.body.token];
+        }
     }
 }
 

@@ -1,34 +1,87 @@
 var app = angular.module("AlexBot", []); 
-app.controller("AlexController", function($scope, $http) {
+app.controller("AlexController", function($scope, $http, $window) {
     $scope.token = "";
-    $scope.messageInput = "message";
+    $scope.messageInput = "";
+    $scope.messages = [];
+
+    $scope.initChat = function() {
+        initChatMessage();
+    }
 
     $scope.sendMessage = function() {
         if($scope.token == "")
         {
-            $http({
-                method: 'POST',
-                url: 'http://localhost:3000/chat/new',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'}
-            }).then(function successCallback(response) {
-                console.log(response);
-                $scope.token = response.data.data.token;
-            }, function errorCallback(response) {
-                console.log(response);
-            });
+            initChatMessage();
+            sendChatMessage();
         }
         else
         {
-            $http({
-                method: 'POST',
-                data: "message="+ $scope.messageInput,
+            sendChatMessage();
+        }
+    }
+
+    $scope.destroySession = function() {
+        if($scope.token != "")
+        {
+             $http({
+                method: 'DELETE',
+                data: "token="+$scope.token,
                 url: 'http://localhost:3000/chat',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'}
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
             }).then(function successCallback(response) {
-                console.log(response);
             }, function errorCallback(response) {
                 console.log(response);
             });
+
+            $scope.token = "";
         }
     }
+
+    function initChatMessage() {
+        $http({
+            method: 'POST',
+            url: 'http://localhost:3000/chat/new',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
+        }).then(function successCallback(response) {
+            $scope.token = response.data.data.token;
+            addToChatLog("alex", response.data.data.response, new Date());
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+    }
+
+    function sendChatMessage() {
+        if($scope.messageInput != "" && $scope.messageInput != null) {
+            let messageInputTmp = $scope.messageInput;
+            $scope.messageInput = "";
+            addToChatLog("", messageInputTmp, new Date());
+            $http({
+                method: 'POST',
+                data: "message="+ $scope.messageInput+"&token="+$scope.token,
+                url: 'http://localhost:3000/chat',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
+            }).then(function successCallback(response) {
+                console.log(response);
+                addToChatLog("alex", "Yes, what router model do you own?", new Date());
+            }, function errorCallback(response) {
+                console.log(response);
+                $scope.messages.splice(-1,1); // remove last user submitted message
+                $scope.messageInput = messageInputTmp; // add the message back to message input
+            });
+        }
+    };
+
+    function addToChatLog(user, message, time) {
+        let tmpMessage = {
+            user: user,
+            message: message,
+            time: time
+        }
+
+        $scope.messages.push(tmpMessage);
+    }
+
+    $window.addEventListener('beforeunload', function(event) {
+        $scope.destroySession();
+    });  
 });
