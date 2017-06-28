@@ -57,14 +57,13 @@ app.controller("AlexController", function($scope, $http, $window) {
             addToChatLog("", messageInputTmp, new Date());
             $http({
                 method: 'POST',
-                data: "message="+ $scope.messageInput+"&token="+$scope.token,
+                data: "message="+messageInputTmp+"&token="+$scope.token,
                 url: 'http://localhost:3000/chat',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
             }).then(function successCallback(response) {
                 console.log(response);
-                addToChatLog("alex", "Yes, what router model do you own?", new Date());
+                addToChatLog("alex", response.data.data.response, new Date());
             }, function errorCallback(response) {
-                console.log(response);
                 $scope.messages.splice(-1,1); // remove last user submitted message
                 $scope.messageInput = messageInputTmp; // add the message back to message input
             });
@@ -79,9 +78,19 @@ app.controller("AlexController", function($scope, $http, $window) {
         }
 
         $scope.messages.push(tmpMessage);
+        updateScroll();
+    }
+
+    function updateScroll(){
+        var element = document.getElementById("messages");
+        element.scrollTop = (element.scrollHeight);
     }
 
     $window.addEventListener('beforeunload', function(event) {
         $scope.destroySession();
     });  
+
+    setInterval(function() {
+        updateScroll();
+    },500);
 });

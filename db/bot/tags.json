@@ -1,0 +1,12 @@
+{
+    "SECTION": "question",
+    "?" : "question",
+    "how" : "question",
+    "can" : "question",
+    "what" : "question",
+    
+    "SECTION": "CTL",
+    "centurylink": "ctl",
+    "ctl": "ctl",
+    "you": "ctl"
+}

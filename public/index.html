@@ -13,7 +13,7 @@
     <div class="chat" ng-app="AlexBot" ng-controller="AlexController" ng-init="initChat()">
         <div class="title">Chat Bot</div>
 
-        <div class="messages">
+        <div id="messages" class="messages">
             <ul>
                 <li ng-repeat="message in messages">
                     <div class="chat-message" ng-class="message.user">
@@ -27,6 +27,7 @@
                     </div>
                 </li>
             </ul>
+            <div id="messages-bottom"></div>
         </div>
         <form class="input">
             <input type="text" ng-model="messageInput"></input>

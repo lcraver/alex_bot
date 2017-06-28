@@ -35,12 +35,28 @@ class ChatBot {
         runtime.express.get('/sessions', function(req, res) {
             dataformatter.SendResponse("Sessions Debug", {sessions: runtime.db.users.currentsessions}, res);
         });
+
+        // Sends user chat message and sends back the bot's response.
+        runtime.express.get('/tags', function(req, res) {
+            dataformatter.SendResponse("Tags Debug", {tags: runtime.db.bot.tags}, res);
+        });
 	};
 
     static HandleChat(req, res) {
         console.log("/chat - Chat Used");
-        console.log(req);
-        dataformatter.SendResponse("Chat Used: " + req.body.message, {}, res);
+        console.log(req.body);
+
+        let tags = ChatBot.FindTags(req.body.message);
+        let message = "";
+
+        if(tags.length == 0)
+        {
+            dataformatter.SendResponse("Chat Used: " + req.body.message, {response: "I'm sorry I don't understand. Please re-ask the question."}, res);
+        }
+        else
+        {
+            dataformatter.SendResponse("Chat Used: " + req.body.message, {response: tags}, res);
+        }
     };
 
     static CreateChatSession(req, res) {
@@ -74,6 +90,28 @@ class ChatBot {
             console.log("/chat - Destroy Chat Session: " + req.body.token);
             delete runtime.db.users.currentsessions[req.body.token];
         }
+    }
+
+    static FindTags(message) {
+        let re = /[\?]/g;
+        let re2 = /[\!]/g;
+        message = message.toLowerCase();
+        message = message.replace(re, ' ?');
+        message = message.replace(re2, ' !');
+        
+        let messageWords = message.split(" ");
+        let tags = [];
+
+        console.log("Words:" + JSON.stringify(messageWords));
+
+        messageWords.forEach(function(word) {
+            if(runtime.db.bot.tags.hasOwnProperty(word))
+                tags.push(runtime.db.bot.tags[word]);
+        });
+
+        console.log("Tags:" + JSON.stringify(tags));
+
+        return tags;
     }
 }
 
