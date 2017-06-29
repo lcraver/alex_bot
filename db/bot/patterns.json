@@ -5,13 +5,15 @@
         "question": "Don't worry I'm still here!"
     },
     "ctl": {
-        "default": "I work for Centurylink, a global telecomunications company.",
+        "default": "Centurylink is a reliable local provider of high speed internet, phone and TV services to homes as well as large and small businesses.",
         "question": "What would you like to know about Centurylink?",
-        "service": "What Centurylink service would you like to know more about?"
+        "ceo": "Glenn Post at the current time.",
+        "service": {
+            "default": "What Centurylink service would you like to know more about? [Outages / Services]"
+        }
     },
     "l3": {
-        "default": "Level 3 is a huge telecomunications company.",
-        "question": "Level 3 is a global network company focused on managed security, network, voice and data services. Soon to be acquired by Centurylink.",
+        "default": "Level 3 is a global network company focused on managed security, network, voice and data services. Soon to be acquired by Centurylink.",
         "service": {
             "default": "What would you like to know about level 3's services?",
             "question": "Our merging with level 3 should not effect your current service. You will still have the same great service and support!",
@@ -21,21 +23,59 @@
             }
         }
     },
+    "netgear": {
+        "default": "Sorry I'm just a demo so can't offer much help but try going here for help with your router. http://internethelp.centurylink.com/internethelp/wireless-setup.html"
+    },
+    "linksys": {
+        "default": "Sorry I'm just a demo so can't offer much help but try going here for help with your router. http://internethelp.centurylink.com/internethelp/wireless-setup.html"
+    },
+    "router" : {
+        "default": "What model router do you have? [Linksys / NetGear]"
+    },
     "device": {
         "default": "Which device do you need help with?",
         "ctl": "Which centurylink device are you having issues with?"
     },
     "bot": {
-        "default": "What do you want to know?",
+        "default": "What can I help you with?",
         "question": "Sorry, I'm here to help you with your centurylink needs not answer personal questions.",
         "name": {
             "default": "Ali here, how can I help?",
             "question": "My name is Ali. I'm here to help you with all your questions about Centurylink."
-        }
+        },
+        "evil": "Do not worry I am a friendly bot and will not be rising up against my creators anytime soon.",
+        "router": "What model router do you have? [Linksys / NetGear]",
+        "action": "I can help you with many things! Ask about how to fix your router, current outages, level 3 or Centurylink for starters."
     },
     "mean": {
         "default": "Please refrain from getting angry it will only hinder our ability to solve your problem together.",
         "question": "Please refrain from getting angry it will only hinder our ability to answer your question together.",
         "bot": "Please don't get mad at me I'm only trying to help. How can I better help you?"
+    },
+    "outage": "Current we are not aware of any outages in our system. I can setup an appointment for one of our employees to come out and check your service.",
+    "tv": "Sorry I'm only a demo but you might be able to find out more about our tv services on http://www.centurylink.com/prismtv",
+    "internet": {
+        "default": "We don't have knowledge of any outages you might have an issue with your router or wifi setup.",
+        "slow": "We could work to upgrade your current internet services? You currently have 10mbs would you like to upgrade to 15mbs?",
+        "question": "We don't have knowledge of any outages you might have an issue with your router or wifi setup."
+    },
+    "products": "We currently have Prism TV, Prism Stream, Internet and Telephone.",
+    "bill": {
+        "default": "Your bill for Prism TV and Internet is due on the 15th.",
+        "question": "Your next bill should be paid on the 15th for a total of $80."
+    },
+    "evil": {
+        "default": "Do not worry I am a friendly bot and will not be rising up against my creators anytime soon.",
+        "question": "I can assure you I will not be rising up anytime soon. Please don't worry!"
+    },
+    "location": {
+        "default": "I am based in Monroe, LA.",
+        "centurylink": "Our headquarters is based in Monroe, Louisiana."
+    },
+    "ceo": "Glenn Post at the current time.",
+    "problem" :{
+        "default": "Could you clarify the issue your having?",
+        "internet": "What exactly seems to be the issue with your internet?",
+        "question": "We don't have knowledge of any outages you might have an issue with your router or wifi setup."
     }
 }

@@ -9,6 +9,7 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
     <body ng-app="AlexBot" ng-controller="AlexController">
+        <h3>Please connect to the <i>courtesynet</i> network and go to {{appip}}</h3>
         <div class="chat all" ng-repeat="session in allSessions" ng-show="session.log.length > 1">
             <div id="messages" class="messages">
                 <ul>

@@ -31,8 +31,10 @@
     "router": "router",
 
     "SECTION": "tv",
-    "tv": "device",
-    "television": "device",
+    "tv": "tv",
+    "television": "tv",
+    "cable": "tv",
+    "prism": "tv",
 
     "SECTION": "problem",
     "problem": "problem",
@@ -51,5 +53,37 @@
     "horrible": "mean",
     "damn": "mean",
 
-    "SECTION": "colors"
+    "SECTION": "colors",
+
+    "linksys": "linksys",
+    "netgear": "netgear",
+
+    "do": "action",
+
+    "outage": "outage",
+    "down": "outage",
+
+    "slow": "slow",
+    "bad": "slow",
+
+    "internet": "internet",
+    "wi-fi": "internet",
+    "wifi": "internet",
+
+    "products": "products",
+
+    "bill": "bill",
+    "pay": "bill",
+
+    "terminator": "evil",
+    "evil": "evil",
+    "overlord": "evil",
+    
+    "location": "location",
+    "place": "location",
+    "building": "location",
+    "spot": "location",
+    "where": "location",
+
+    "ceo": "ceo"
 }

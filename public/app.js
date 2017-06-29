@@ -4,7 +4,10 @@ app.controller("AlexController", function($scope, $http, $window) {
     $scope.messageInput = "";
     $scope.messages = [];
 
-    let ip = "http://10.142.59.168:8000/";
+    $scope.ip = "http://10.142.59.168";
+    $scope.appip = $scope.ip + ":3000/";
+
+    $scope.apiID = $scope.ip + ":8000/";
 
     $scope.allSessions = [];
 
@@ -30,7 +33,7 @@ app.controller("AlexController", function($scope, $http, $window) {
              $http({
                 method: 'DELETE',
                 data: "token="+$scope.token,
-                url: ip + 'chat',
+                url: $scope.apiID + 'chat',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
             }).then(function successCallback(response) {
             }, function errorCallback(response) {
@@ -44,7 +47,7 @@ app.controller("AlexController", function($scope, $http, $window) {
     function initChatMessage() {
         $http({
             method: 'POST',
-            url: ip + 'chat/new',
+            url: $scope.apiID + 'chat/new',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
         }).then(function successCallback(response) {
             $scope.token = response.data.data.token;
@@ -62,7 +65,7 @@ app.controller("AlexController", function($scope, $http, $window) {
             $http({
                 method: 'POST',
                 data: "message="+messageInputTmp+"&token="+$scope.token,
-                url: ip + 'chat',
+                url: $scope.apiID + 'chat',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
             }).then(function successCallback(response) {
                 console.log(response);
@@ -106,7 +109,7 @@ app.controller("AlexController", function($scope, $http, $window) {
     function getAllChats() {
         $http({
             method: 'GET',
-            url: ip + 'sessions',
+            url: $scope.apiID + 'sessions',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
         }).then(function successCallback(response) {
             //console.log(response.data.data);
