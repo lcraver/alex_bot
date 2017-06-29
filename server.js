@@ -17,6 +17,7 @@ runtime.express = app;
 runtime.version = require('./package').version;
 runtime.db.users.currentsessions = require('./db/users/currentsessions');
 runtime.db.bot.tags = require('./db/bot/tags');
+runtime.db.bot.patterns = require('./db/bot/patterns');
 runtime.fs = fs;
 
 console.log(runtime);

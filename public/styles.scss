@@ -1,3 +1,8 @@
+html, body {
+    height:100%;
+    margin:0;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -15,12 +20,40 @@ body {
     position: relative;
 }
 
+@media screen and (max-width: 600px) {
+    body {
+        display: flex;
+    }
+
+    .chat {
+        flex-grow: 1;
+        height: auto;
+        width: calc(100% - 16px);
+        margin: 0;
+        border-radius: 0px;
+    }
+}
+
+.chat.all {
+    width: calc(25% - 16px);
+    float: left;
+    margin: 8px;
+    position: relative;
+    padding: 0;
+    height: 300px;
+    background: none;
+}
+
 .chat .title {
     display: block;
     font-size: 24px;
     height: 32px;
     line-height: 28px;
     color: white;
+}
+
+.chat.all .title {
+    padding: 8px;
 }
 
 .chat .messages {
@@ -34,10 +67,28 @@ body {
     padding: 16px;
 }
 
+
+.chat.all .messages {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background: #EDEDED;
+    overflow-y: scroll;
+    padding: 16px;
+    border-radius: 3px;
+}
+
 .chat .messages ul {
     margin: 0;
     padding: 0;
     width: 100%;
+}
+
+@keyframes fade-in-message {
+    from {opacity: 0; transform: translateY(-16px)}
+    to {opacity: 1; transform: translateY(0px)}
 }
 
 .chat .messages ul li {
@@ -45,6 +96,12 @@ body {
     color: white;
     padding: 0;
     margin: 16px 0 0 0;
+    animation: fade-in-message 0.25s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.chat.all .messages ul li {
+    animation: none;
 }
 
 .chat .messages ul li:first-child {
@@ -68,6 +125,10 @@ body {
     order: 2;
     align-self: flex-end;
     display: none;
+}
+
+.chat .messages ul li .chat-message .user i {
+    padding-left: 1px;
 }
 
 .chat .messages ul li .chat-message.alex .user {
@@ -135,4 +196,19 @@ body {
     background: #E0E0E0;
     color: #333;
     font-weight: 500;
+}
+
+.chat.all .messages ul {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+.chat.all .messages ul li {
+    margin: 0;
+
+    &:last-child {
+        margin-top: 16px;
+    }
 }

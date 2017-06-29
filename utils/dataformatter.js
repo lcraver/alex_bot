@@ -12,6 +12,7 @@ class DataFormatter {
         }
         response.data.message = _message;
 
+        res.setHeader('Access-Control-Allow-Origin', '*');
         res.send(response);
     }
 }

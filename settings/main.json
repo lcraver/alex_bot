@@ -1,7 +1,18 @@
 {
-    "name": "Alex",
+    "name": "Ali",
     "greetings": [
-        "Hello there! How can I help you today?",
-        "How can I assist you today?"
+        "Hello there my name is Ali. How can I help you today?",
+        "This is Ali, how can I assist you today?",
+        "This is Ali, what can I help you with today?",
+        "My name is Ali, what can I help you with today?"
+    ],
+    "ip": "http://10.141.57.215:8000", 
+    "banned_words": [
+        "fuck",
+        "shit",
+        "ass",
+        "bitch",
+        "damn",
+        "dammit"
     ]
 }

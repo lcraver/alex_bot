@@ -1,0 +1,37 @@
+{
+    "default": "I'm sorry I don't understand. Please rephrase your response.",
+    "greeting": {
+        "default": "Hello, what can I do for you today.",
+        "question": "Don't worry I'm still here!"
+    },
+    "ctl": {
+        "default": "I work for Centurylink, a global telecomunications company.",
+        "question": "What would you like to know about Centurylink?",
+        "service": "What Centurylink service would you like to know more about?"
+    },
+    "l3": {
+        "default": "Level 3 is a huge telecomunications company.",
+        "question": "Level 3 is a global network company focused on managed security, network, voice and data services. Soon to be acquired by Centurylink.",
+        "service": {
+            "default": "What would you like to know about level 3's services?",
+            "question": "Our merging with level 3 should not effect your current service. You will still have the same great service and support!",
+            "problem": {
+                "default": "No problems should arise from our merge with level 3. But if you're having an issue let's see if we can work it out.",
+                "question": "There are no expected problems that would cause your service to be effect by our merge with level 3."
+            }
+        }
+    },
+    "device": {
+        "default": "Which device do you need help with?",
+        "ctl": "Which centurylink device are you having issues with?"
+    },
+    "bot": {
+        "default": "What do you want to know?",
+        "question": "Sorry, I'm here to help you with your centurylink needs not answer personal questions."
+    },
+    "mean": {
+        "default": "Please refrain from getting angry it will only hinder our ability to solve your problem together.",
+        "question": "Please refrain from getting angry it will only hinder our ability to answer your question together.",
+        "bot": "Please don't get mad at me I'm only trying to help. How can I better help you?"
+    }
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Alex Bot</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <script src="./app.js"></script>
+
+        <link rel="stylesheet" href="./css/styles.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </head>
+    <body ng-app="AlexBot" ng-controller="AlexController">
+        <div class="chat all" ng-repeat="session in allSessions" ng-show="session.log.length > 1">
+            <div id="messages" class="messages">
+                <ul>
+                    <li ng-repeat="message in session.log" ng-show="$index == session.log.length-1 || $index == session.log.length-2">
+                        <div class="chat-message" ng-class="message.user">
+                            <div class="user">
+                                <i class="material-icons">person</i>
+                            </div>
+                            <div class="message">
+                                {{message.message}}
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div id="messages-bottom"></div>
+            </div>
+        </div>
+    </body>
+</html>

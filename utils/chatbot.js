@@ -12,8 +12,8 @@ function randomStringAsBase64Url(size) {
 
 class ChatBot {
 	static Start() {
-        runtime.express.listen(3000, function () {
-            console.log('Alex Bot listening on port 3000');
+        runtime.express.listen(8000, function () {
+            console.log('Alex Bot listening on port 8000');
         });
 
         // Sends user chat message and sends back the bot's response.
@@ -47,16 +47,11 @@ class ChatBot {
         console.log(req.body);
 
         let tags = ChatBot.FindTags(req.body.message);
-        let message = "";
-
-        if(tags.length == 0)
-        {
-            dataformatter.SendResponse("Chat Used: " + req.body.message, {response: "I'm sorry I don't understand. Please re-ask the question."}, res);
-        }
-        else
-        {
-            dataformatter.SendResponse("Chat Used: " + req.body.message, {response: tags}, res);
-        }
+        ChatBot.FindResponse(tags, function(response){
+            ChatBot.AddToLog(req.body.token, "user", req.body.message);
+            ChatBot.AddToLog(req.body.token, "alex", response);
+            dataformatter.SendResponse("Chat Used: " + req.body.message, {response: response, tags: tags}, res);
+        });
     };
 
     static CreateChatSession(req, res) {
@@ -64,25 +59,53 @@ class ChatBot {
         let greetings = runtime.settings.greetings;
 
         let token = randomStringAsBase64Url(64);
-        ChatBot.CreateSessionInfo(token);
+        let greeting = greetings.random();
+        ChatBot.CreateSessionInfo(token, greeting);
+
         dataformatter.SendResponse("Chat Session Created", {token: token, response: greetings.random()}, res);
     }
 
-    static CreateSessionInfo(token)
+    static CreateSessionInfo(token, greeting)
     {
         let sessionTmp = {
             user: "",
             context: {
 
-            }
+            },
+            log: []
         }
 
         runtime.db.users.currentsessions[token] = sessionTmp;
+
+        ChatBot.AddToLog(token, "alex", greeting);
     }
 
     static UpdateSessionInfo(token, context)
     {
         runtime.db.users.currentsessions[token].context.push(context);
+    }
+
+    static AddToLog(token, user, message) {
+
+        runtime.settings.banned_words.forEach(function(word) {
+
+            let lowercaseMessage = message.toLowerCase();
+            let index = lowercaseMessage.indexOf(word.toLowerCase());
+
+            if(index != -1) {
+                console.log("FOUND BAD");
+                for(let i = 0; i < word.length; i++)
+                    message = message.replaceAt(index+i, "*");
+            }
+        });
+
+        let tmpMessage = {
+            user: user,
+            message: message,
+            time: new Date()
+        }
+
+        runtime.db.users.currentsessions[token].log.push(tmpMessage);
     }
 
     static DestroyChatSession(req, res) {
@@ -98,6 +121,8 @@ class ChatBot {
         message = message.toLowerCase();
         message = message.replace(re, ' ?');
         message = message.replace(re2, ' !');
+        message = message.replace("century link", 'centurylink');
+        message = message.replace("level 3", 'level3');
         
         let messageWords = message.split(" ");
         let tags = [];
@@ -112,6 +137,51 @@ class ChatBot {
         console.log("Tags:" + JSON.stringify(tags));
 
         return tags;
+    }
+
+    static FindResponse(tags, callback) {
+
+        let currentObj = runtime.db.bot.patterns;
+        let newTags = tags;
+
+        //make recurrsive
+
+        /*tags.forEach(function(tag) {
+            if(currentObj != undefined && currentObj != null) {
+                if(currentObj.hasOwnProperty(tag))
+                    currentObj = currentObj[tag];
+                else
+                {
+                    console.log("DEFAULT");
+                    if(currentObj.hasOwnProperty("default"))
+                        currentObj = currentObj["default"];
+                }
+
+                console.log(currentObj);
+            }
+        });*/
+
+        while(tags.length != 0) {
+            let tag = newTags[0];
+
+            if(currentObj.hasOwnProperty(tag))
+                currentObj = currentObj[tag];
+
+            newTags.splice(0,1);
+
+            console.log("tags:" + JSON.stringify(newTags));
+            console.log("obj:" + JSON.stringify(currentObj));
+
+            if(newTags.length == 0)
+            {
+                if(currentObj.hasOwnProperty("default"))
+                    return callback(currentObj["default"]);
+                else
+                    return callback(currentObj);
+            }
+        }
+
+        return callback(runtime.db.bot.patterns["default"]);
     }
 }
 

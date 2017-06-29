@@ -4,9 +4,48 @@
     "how" : "question",
     "can" : "question",
     "what" : "question",
-    
-    "SECTION": "CTL",
+
+    "SECTION": "ctl",
     "centurylink": "ctl",
     "ctl": "ctl",
-    "you": "ctl"
+    "alex": "ctl",
+
+    "SECTION": "bot",
+    "ali": "bot",
+    "you": "bot",
+
+    "SECTION": "l3",
+    "level3": "l3",
+
+    "SECTION": "!",
+    "!": "!",
+
+    "SECTION": "greeting",
+    "hello": "greeting",
+
+    "SECTION": "router",
+    "router": "router",
+
+    "SECTION": "tv",
+    "tv": "device",
+    "television": "device",
+
+    "SECTION": "problem",
+    "problem": "problem",
+    "issue": "problem",
+
+    "SECTION": "service",
+    "service": "service",
+    "services": "service",
+    "account": "service",
+    
+    "SECTION": "mean",
+    "fuck": "mean",
+    "shit": "mean",
+    "stupid": "mean",
+    "bitch": "mean",
+    "horrible": "mean",
+    "damn": "mean",
+
+    "SECTION": "colors"
 }

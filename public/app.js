@@ -4,6 +4,10 @@ app.controller("AlexController", function($scope, $http, $window) {
     $scope.messageInput = "";
     $scope.messages = [];
 
+    let ip = "http://10.142.59.195:8000/";
+
+    $scope.allSessions = [];
+
     $scope.initChat = function() {
         initChatMessage();
     }
@@ -26,7 +30,7 @@ app.controller("AlexController", function($scope, $http, $window) {
              $http({
                 method: 'DELETE',
                 data: "token="+$scope.token,
-                url: 'http://localhost:3000/chat',
+                url: ip + 'chat',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
             }).then(function successCallback(response) {
             }, function errorCallback(response) {
@@ -40,7 +44,7 @@ app.controller("AlexController", function($scope, $http, $window) {
     function initChatMessage() {
         $http({
             method: 'POST',
-            url: 'http://localhost:3000/chat/new',
+            url: ip + 'chat/new',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
         }).then(function successCallback(response) {
             $scope.token = response.data.data.token;
@@ -58,7 +62,7 @@ app.controller("AlexController", function($scope, $http, $window) {
             $http({
                 method: 'POST',
                 data: "message="+messageInputTmp+"&token="+$scope.token,
-                url: 'http://localhost:3000/chat',
+                url: ip + 'chat',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
             }).then(function successCallback(response) {
                 console.log(response);
@@ -78,19 +82,55 @@ app.controller("AlexController", function($scope, $http, $window) {
         }
 
         $scope.messages.push(tmpMessage);
-        updateScroll();
+
+        setTimeout( function(){ 
+            updateScroll();
+        }, 100);
     }
 
     function updateScroll(){
-        var element = document.getElementById("messages");
-        element.scrollTop = (element.scrollHeight);
+        var elements = document.getElementsByClassName("messages");
+
+        for(let i = 0; i < elements.length; i++) {
+            elements[i].scrollTop = elements[i].scrollHeight;
+        }
     }
 
     $window.addEventListener('beforeunload', function(event) {
         $scope.destroySession();
     });  
 
-    setInterval(function() {
-        updateScroll();
-    },500);
+    getAllChats();
+    setInterval(getAllChats, 5000);
+
+    function getAllChats() {
+        $http({
+            method: 'GET',
+            url: ip + 'sessions',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
+        }).then(function successCallback(response) {
+            //console.log(response.data.data);
+            $scope.allSessions = Object.keys(response.data.data.sessions).map(function (key) { return response.data.data.sessions[key]; });
+
+            $scope.allSessions.sort(function(a,b){
+                return b.log.length - a.log.length;
+            });
+
+            setTimeout( function(){ 
+                //updateScroll();
+            }, 100);
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+    }
+
+    $scope.compareMessageLengths = function(v1, v2) {
+        // If we don't get strings, just compare by index
+        if (v1.type !== 'string' || v2.type !== 'string') {
+            return (v1.index < v2.index) ? -1 : 1;
+        }
+
+        // Compare strings alphabetically, taking locale into account
+        return v1.value.localeCompare(v2.value);
+    }
 });

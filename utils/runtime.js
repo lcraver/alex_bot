@@ -8,7 +8,8 @@ module.exports = {
     brain: null,
     db: {
         bot: {
-            tags: {}
+            tags: {},
+            patterns: {}
         },
         users: {
             currentsessions: {}
