@@ -4,7 +4,7 @@ app.controller("AlexController", function($scope, $http, $window) {
     $scope.messageInput = "";
     $scope.messages = [];
 
-    let ip = "http://10.142.59.195:8000/";
+    let ip = "http://10.142.59.168:8000/";
 
     $scope.allSessions = [];
 

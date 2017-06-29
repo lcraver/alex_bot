@@ -27,7 +27,11 @@
     },
     "bot": {
         "default": "What do you want to know?",
-        "question": "Sorry, I'm here to help you with your centurylink needs not answer personal questions."
+        "question": "Sorry, I'm here to help you with your centurylink needs not answer personal questions.",
+        "name": {
+            "default": "Ali here, how can I help?",
+            "question": "My name is Ali. I'm here to help you with all your questions about Centurylink."
+        }
     },
     "mean": {
         "default": "Please refrain from getting angry it will only hinder our ability to solve your problem together.",
