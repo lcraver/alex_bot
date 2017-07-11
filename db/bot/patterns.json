@@ -8,9 +8,7 @@
         "default": "Centurylink is a reliable local provider of high speed internet, phone and TV services to homes as well as large and small businesses.",
         "question": "What would you like to know about Centurylink?",
         "ceo": "Glenn Post at the current time.",
-        "service": {
-            "default": "What Centurylink service would you like to know more about? [Outages / Services]"
-        }
+        "service": "What Centurylink service would you like to know more about? [Outages / Services]"
     },
     "l3": {
         "default": "Level 3 is a global network company focused on managed security, network, voice and data services. Soon to be acquired by Centurylink.",
@@ -21,20 +19,17 @@
                 "default": "No problems should arise from our merge with level 3. But if you're having an issue let's see if we can work it out.",
                 "question": "There are no expected problems that would cause your service to be effect by our merge with level 3."
             }
-        }
+        },
+        "ctl": "Centurylink's merge with level 3 should only expand our coverage while still having the same great service and support!",
+        "user": "Centurylink's merge with level 3 will double our internet coverage. We are super excited!",
+        "internet": "Centurylink's merge with level 3 will double our internet coverage. We are super excited!"
     },
-    "netgear": {
-        "default": "Sorry I'm just a demo so can't offer much help but try going here for help with your router. http://internethelp.centurylink.com/internethelp/wireless-setup.html"
-    },
-    "linksys": {
-        "default": "Sorry I'm just a demo so can't offer much help but try going here for help with your router. http://internethelp.centurylink.com/internethelp/wireless-setup.html"
-    },
-    "router" : {
-        "default": "What model router do you have? [Linksys / NetGear]"
-    },
+    "netgear": "Sorry I'm just a demo so can't offer much help but try going here for help with your router. http://internethelp.centurylink.com/internethelp/wireless-setup.html",
+    "linksys": "Sorry I'm just a demo so can't offer much help but try going here for help with your router. http://internethelp.centurylink.com/internethelp/wireless-setup.html",
+    "router" : "What model router do you have? [Linksys / NetGear]",
     "device": {
         "default": "Which device do you need help with?",
-        "ctl": "Which centurylink device are you having issues with?"
+        "ctl": "Which centurylink device are you having issues with? [tv / internet]"
     },
     "bot": {
         "default": "What can I help you with?",
@@ -45,14 +40,20 @@
         },
         "evil": "Do not worry I am a friendly bot and will not be rising up against my creators anytime soon.",
         "router": "What model router do you have? [Linksys / NetGear]",
-        "action": "I can help you with many things! Ask about how to fix your router, current outages, level 3 or Centurylink for starters."
+        "action": "I can help you with many things! Ask about how to fix your router, current outages, level 3 or Centurylink for starters.",
+        "user": {
+            "default": "Sorry but I can't help you with personal questions.",
+            "router": "What model router do you have? [Linksys / NetGear]",
+            "internet": "What issues are you having with your internet?",
+            "tv": "What issues are you having with your television service?"
+        }
     },
     "mean": {
         "default": "Please refrain from getting angry it will only hinder our ability to solve your problem together.",
         "question": "Please refrain from getting angry it will only hinder our ability to answer your question together.",
         "bot": "Please don't get mad at me I'm only trying to help. How can I better help you?"
     },
-    "outage": "Current we are not aware of any outages in our system. I can setup an appointment for one of our employees to come out and check your service.",
+    "outage": "Currently we are not aware of any outages in our system. I can setup an appointment for one of our employees to come out and check your service.",
     "tv": "Sorry I'm only a demo but you might be able to find out more about our tv services on http://www.centurylink.com/prismtv",
     "internet": {
         "default": "We don't have knowledge of any outages you might have an issue with your router or wifi setup.",

@@ -52,6 +52,7 @@
     "bitch": "mean",
     "horrible": "mean",
     "damn": "mean",
+    "screw": "mean",
 
     "SECTION": "colors",
 
@@ -62,6 +63,7 @@
 
     "outage": "outage",
     "down": "outage",
+    "broken": "outage",
 
     "slow": "slow",
     "bad": "slow",
@@ -85,5 +87,9 @@
     "spot": "location",
     "where": "location",
 
-    "ceo": "ceo"
+    "ceo": "ceo",
+
+    "me": "user",
+    "my": "user",
+    "I": "user"
 }
